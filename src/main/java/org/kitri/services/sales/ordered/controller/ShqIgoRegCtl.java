@@ -4,8 +4,10 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.kitri.services.common.login.session.SvcComLgnSsn;
 import org.kitri.services.sales.ordered.dto.ShqIgoRegIIDto;
 import org.kitri.services.sales.ordered.service.IShqIgoRegSvc;
+import org.kitri.services.sales.repo.dto.SvcComEmpLgnDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,9 @@ public class ShqIgoRegCtl {
 	
 	@PostMapping("/integrationorder")
 	public String integrationOrderRegistration(@RequestParam String orderId, HttpSession httpSession, Model model) {
-//		String employeeId = (String)httpSession.getAttribute("employeeId");
-		String employeeId = "11111";
+		SvcComEmpLgnDto employee = (SvcComEmpLgnDto) SvcComLgnSsn.getValue(httpSession, "user");
+		String employeeId = employee.getEmployeeId();
+		System.out.println(employeeId);
 		String integrationResult = iRegSvc.integrationOrderRegistration(orderId, employeeId);
 		model.addAttribute("result", integrationResult);
 		return "/sales/ordered/orderedlist";

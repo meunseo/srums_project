@@ -16,16 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/inbound")
 public class ShqInbImiAprController {
 	private final ShqInbImiService svc;
-	
+
 	@Autowired
-	public ShqInbImiAprController(@Qualifier("shqInbImiService")
-							   ShqInbImiService service) {
+	public ShqInbImiAprController(@Qualifier("shqInbImiService") ShqInbImiService service) {
 		svc = service;
 	}
-	
+
 	@PostMapping("/approve")
-	public String updatIncomingStocks(Model model,
-									  @ModelAttribute ShqInbImiDto reqDto){
+	public String updatIncomingStocks(Model model, @ModelAttribute ShqInbImiDto reqDto) {
 		svc.approveStock(reqDto);
 		return "true";
 	}

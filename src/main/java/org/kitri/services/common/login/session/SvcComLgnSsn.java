@@ -133,7 +133,7 @@ public class SvcComLgnSsn implements HttpSessionListener{
 	 * @author 박시연
 	 * @since 2025-01-02
 	 */
-	public Object getValue(HttpSession session, String attName) {
+	public static Object getValue(HttpSession session, String attName) {
 		return session.getAttribute(attName);
 	}
 	
